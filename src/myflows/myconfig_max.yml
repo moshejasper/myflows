@@ -1,0 +1,93 @@
+# ============================================================
+# PROJECT PATHS
+# ============================================================
+
+# Root of the project path tree
+base: !root .
+
+# Main project directories
+workdir: !base workdir
+datadir: !base datadir
+genomes: !base genomes
+binaries: !base binaries
+tempdir: !base temp
+
+# Absolute/global temporary location
+global_temp: !path /tmp
+
+
+# ============================================================
+# RUNTIME / LOGGING / TRACKING
+# ============================================================
+
+# Runtime directories, linked to workdir
+logfolder: !work logs
+exfolder: !work temp_execs
+slurm_temp: !work temp_slurm
+
+# Logging
+logname: mylog
+
+# Simple progress tracker
+trackfile: !work tracker.txt
+
+# Failure log
+failfile: !work failures.txt
+
+
+# ============================================================
+# SLURM DEFAULTS
+# ============================================================
+
+slurm_settings:
+
+  # ----- cluster / queue -----
+
+  # One or more partitions available for these jobs
+  partitions: [cascade, sapphire]
+
+  # Common QoS for the partitions above
+  qos: normal
+
+  # Account/project allocation, if required by the cluster
+  account: punimxxxx
+
+
+  # ----- resources -----
+
+  # CPUs per task
+  threads: 1
+
+  # Memory per CPU, in GB
+  threadmem: 5
+
+  # Node/task layout
+  nodes: 1
+  ntasks: 1
+
+  # Local temporary storage, in GB.
+  # 0 means do not emit an --tmp directive.
+  tmp_mem: 0
+
+  # SLURM time limit
+  jobtime: "00-06:00:00"
+
+
+  # ----- environment -----
+
+  # Modules loaded before running the Python script
+  modules:
+    - GSL/2.7
+    - unimelb-mf-clients
+
+  # Module providing conda, if required
+  condamodule: Miniconda3
+
+  # Conda environment activated before execution
+  conda_env: base
+
+
+  # ----- execution -----
+
+  # Command run after the Python process completes
+  postscript: my-job-stats -a -n -s

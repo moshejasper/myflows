@@ -1,0 +1,23 @@
+# ---- core project paths ----
+
+base: !root .
+workdir: !base workdir
+
+logfolder: !work logs
+exfolder: !work temp_execs
+slurm_temp: !work temp_slurm
+
+logname: mylog
+trackfile: !work tracker.txt
+failfile: !work failures.txt
+
+
+# ---- SLURM defaults ----
+
+slurm_settings:
+  partitions: [cascade]
+  qos: normal
+
+  threads: 1
+  threadmem: 5
+  jobtime: "00-06:00:00"

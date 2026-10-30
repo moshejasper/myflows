@@ -1,0 +1,23 @@
+[project]
+name = "myflows"
+version = "0.0.1"
+authors = [
+ { name="Moshe Jasper", email="mjasper@student.unimelb.edu.au" },
+]
+description = "contains functionality for running work-flow based management of pipelines"
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+dependencies = [
+    "pyyaml", 
+]
+
+
+[build-system]
+requires = ["setuptools >= 77.0.3", "wheel"]
+build-backend = "setuptools.build_meta"
